@@ -63,3 +63,9 @@ def upgrade():
     "Upgrade packages with apt-get"
     sudo("apt-get update; apt-get upgrade -y")
 
+@task
+@runs_once
+def tag(key, value):
+    "Tag EC2 nodes with key,value"
+    for node in env.nodes:
+        node.add_tag(key, value)
